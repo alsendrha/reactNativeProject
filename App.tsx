@@ -6,7 +6,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import MyPage from './src/screens/MyPage';
 import Detail from './src/screens/Detail';
-
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import MyBottomSheet from './src/components/MyBottomSheet';
 function App(): React.JSX.Element {
   const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -19,13 +20,15 @@ function App(): React.JSX.Element {
     );
   };
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Bottom" component={BottomTabScreen} />
-        <Stack.Screen name="MyPage" component={Main} />
-        <Stack.Screen name="Detail" component={Detail} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Bottom" component={BottomTabScreen} />
+          <Stack.Screen name="MyPage" component={Main} />
+          <Stack.Screen name="Detail" component={Detail} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 

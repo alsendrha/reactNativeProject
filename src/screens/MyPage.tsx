@@ -11,8 +11,10 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {styled} from 'nativewind';
 
 const MyPage = () => {
+  const StyledView = styled(View);
   const [data, setData] = useState([]);
   const nav = useNavigation<any>();
   useEffect(() => {
@@ -28,21 +30,21 @@ const MyPage = () => {
   };
 
   return (
-    <View className="px-2">
-      <ScrollView>
+    <View className=" bg-white">
+      <ScrollView className="w-full px-5 bg-white">
         {data.map((item: any) => (
           <TouchableOpacity
             activeOpacity={1}
             key={item.contentsid}
             onPress={() => nav.navigate('Detail', {data: item})}>
-            <View className="w-full h-[200px] border mb-3 rounded-lg">
+            <StyledView className="w-full h-[200px]  mb-3 rounded-lg border">
               <Text>{item.title}</Text>
               <Image
                 source={{uri: item.repPhoto.photoid.imgpath}}
                 className="w-full h-[150px] object-cover"
                 alt="이미지"
               />
-            </View>
+            </StyledView>
           </TouchableOpacity>
         ))}
       </ScrollView>
