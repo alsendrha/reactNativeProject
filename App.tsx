@@ -1,13 +1,32 @@
 import React from 'react';
-import {SafeAreaView, Text} from 'react-native';
-import Main from './src/screens/Main';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Tab = createBottomTabNavigator();
+import Main from './src/screens/Main';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import MyPage from './src/screens/MyPage';
+import Detail from './src/screens/Detail';
 
 function App(): React.JSX.Element {
-  return <Main />;
+  const Stack = createNativeStackNavigator();
+  const Tab = createBottomTabNavigator();
+  const BottomTabScreen = () => {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen name="Main" component={Main} />
+        <Tab.Screen name="MyPage" component={MyPage} />
+      </Tab.Navigator>
+    );
+  };
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Bottom" component={BottomTabScreen} />
+        <Stack.Screen name="MyPage" component={Main} />
+        <Stack.Screen name="Detail" component={Detail} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 
 export default App;
